@@ -1,4 +1,6 @@
 .sonarlint
 
 /node_modules
+.vscode
+.idea
 
