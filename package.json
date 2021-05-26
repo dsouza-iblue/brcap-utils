@@ -20,6 +20,7 @@
     "fast-memoize": "^2.5.2",
     "jsonschema": "^1.2.4",
     "moment": "^2.22.2",
-    "moment-business-days": "^1.0.6"
+    "moment-business-days": "^1.0.6",
+    "sequelize": "^6.6.2"
   }
 }
