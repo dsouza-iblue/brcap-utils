@@ -86,3 +86,21 @@ Exemplo de utilização:
     } else {
         return "validado"
     }
+
+## Método utilitário para buscar os lote contábeis abertos.
+
+#### Deve passar os seguintes parâmetros:
+- {Model} modelLoteContabil - Instância da model do sequelize do lote contábil
+- {string} moduloContabil - O módulo contábil entre `TR`, `GL` ou `AP`
+- {number} idTipoEventoContabil - ID do tipo de evento contábil
+- {string} situacaoContabil - A situação contábil entre `A`, `S`, `I`, `E`, `P`, `R` ou `X`
+
+#### Exemplo de utilização:
+```js
+const Util = require('brcap-utils');
+const model = require('../models/Model');
+
+const { MODULO_CONTABIL, SITUACAO_CONTABIL } = Util;
+
+Util.buscarLotesEmAberto(model.getLoteContabil(), MODULO_CONTABIL.GL, 1, SITUACAO_CONTABIL.R);
+```
