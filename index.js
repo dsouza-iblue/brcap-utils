@@ -10,6 +10,8 @@ const Log = require('./util/Log');
 const BRMath = require('./util/Math');
 const sequelizePaginate = require('./util/SequelizeTools').paginate;
 const getProp = require('./util/getProp');
+const LoteContabil = require('./util/LoteContabil');
+const { MODULO_CONTABIL, SITUACAO_CONTABIL } = require('./util/Enums');
 
 
 /**
@@ -273,8 +275,17 @@ function buscaBancoFebraban(tableName, region, callback) {
  */
 
  function getDataLocal(dateFormat){
-  return GetDataLocal.getDataLocal(dateFormat)
+  return GetDataLocal.getDataLocal(dateFormat);
  }
+
+/**
+ * @param {Model} modelLoteContabil - Sequelize.Model
+ * @param {string} moduloContabil
+ * @param {number} idTipoEventoContabil
+ * @param {string} situacaoContabil
+ * @return {Promise<any>}
+ */
+ const buscarLotesEmAberto = (modelLoteContabil, moduloContabil, idTipoEventoContabil, situacaoContabil) => LoteContabil.buscarLotesEmAberto(modelLoteContabil, moduloContabil, idTipoEventoContabil, situacaoContabil);
 
 module.exports = {
   cpfEhValido,
@@ -292,5 +303,8 @@ module.exports = {
   Log,
   BRMath,
   sequelizePaginate,
-  getDataLocal
+  getDataLocal,
+  buscarLotesEmAberto,
+  MODULO_CONTABIL,
+  SITUACAO_CONTABIL
 };
