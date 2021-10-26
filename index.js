@@ -10,6 +10,7 @@ const Log = require('./util/Log');
 const BRMath = require('./util/Math');
 const sequelizePaginate = require('./util/SequelizeTools').paginate;
 const getProp = require('./util/getProp');
+const aws = require('brcap-aws');
 const {
   isString, isUndefined, isNil, isObject,
 } = require('./util/shared');
@@ -279,6 +280,19 @@ function getDataLocal(dateFormat) {
   return GetDataLocal.getDataLocal(dateFormat);
 }
 
+const getCryptedDbProperties = async (fn, dev = true) => {
+  const bucket = dev ? 'brasilcap-properties-dev' : 'brasilcap-properties-prd';
+  return new Promise((resolve, reject) => {
+    aws.S3_Get(bucket, 'capitalizacao_db.enc', (err, result) => (err ? reject({ body: null, region: null, err }) : resolve({ body: result.Body, region: 'sa-east-1', err: '' })));
+  });
+};
+
+const kmsDecrypt = data => new Promise(
+  (resolve, reject) => aws.Kms_decrypt(data.body, data.region,
+    (error, sucess) => (error ? reject(error) : resolve(JSON.parse(sucess)))),
+);
+
+
 module.exports = {
   cpfEhValido,
   limpaCPF,
@@ -296,6 +310,8 @@ module.exports = {
   BRMath,
   sequelizePaginate,
   getDataLocal,
+  getCryptedDbProperties,
+  kmsDecrypt,
   isString,
   isUndefined,
   isNil,
