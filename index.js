@@ -10,6 +10,9 @@ const Log = require('./util/Log');
 const BRMath = require('./util/Math');
 const sequelizePaginate = require('./util/SequelizeTools').paginate;
 const getProp = require('./util/getProp');
+const {
+  isString, isUndefined, isNil, isObject,
+} = require('./util/shared');
 
 
 /**
@@ -272,9 +275,9 @@ function buscaBancoFebraban(tableName, region, callback) {
  * @returns {Promise}
  */
 
- function getDataLocal(dateFormat){
-  return GetDataLocal.getDataLocal(dateFormat)
- }
+function getDataLocal(dateFormat) {
+  return GetDataLocal.getDataLocal(dateFormat);
+}
 
 module.exports = {
   cpfEhValido,
@@ -292,5 +295,9 @@ module.exports = {
   Log,
   BRMath,
   sequelizePaginate,
-  getDataLocal
+  getDataLocal,
+  isString,
+  isUndefined,
+  isNil,
+  isObject,
 };

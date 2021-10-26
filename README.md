@@ -86,3 +86,25 @@ Exemplo de utilização:
     } else {
         return "validado"
     }
+
+## Método utilitário para verificar se o valor é uma string, undefined, null ou object:
+```javascript
+const { isString, isUndefined, isNil, isObject } = require('brcap-utils');
+
+// é um texto
+isString('teste') // true
+isString(123) // false
+
+// é indefinido
+isUndefined(undefined) // true
+isUndefined('teste') // false
+
+// é indefinido ou nulo
+isNil(undefined) // true
+isNil(null) // true
+isNil('teste') // false
+
+// é um objeto
+isObject({ teste: 'teste' }) // true
+isObject('teste') // false
+```
