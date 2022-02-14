@@ -285,7 +285,7 @@ const getCryptedDbProperties = async (fn, dev = true) => {
   return new Promise((resolve, reject) => {
     aws.S3_Get(bucket, 'capitalizacao_db.enc', (err, result) => (err ? reject({ body: null, region: null, err }) : resolve({ body: result.Body, region: 'sa-east-1', err: '' })));
   });
-};
+}
 
 const kmsDecrypt = data => new Promise(
   (resolve, reject) => aws.Kms_decrypt(data.body, data.region,
